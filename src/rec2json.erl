@@ -174,11 +174,8 @@ from_json(SeedTuple, Json, Options) ->
     TreatNull = proplists:get_value(null_is_undefined, Options, false),
     from_json(Zipped, Json, TreatNull, SeedTuple, []).
 
-from_json(_Zipped, [], _TreatNull, Tuple, []) ->
+from_json(_Zipped, [], _TreatNull, Tuple, _Warnings) ->
     {ok, Tuple};
-
-from_json(_Zipped, [], _TreatNull, Tuple, Warnings) ->
-    {ok, Tuple, lists:reverse(Warnings)};
 
 from_json(Zipped, [{NameAtom, Value} | Json], TreatNull, Tuple, Warnings) when is_atom(NameAtom) ->
     NameBin = list_to_binary(atom_to_list(NameAtom)),
