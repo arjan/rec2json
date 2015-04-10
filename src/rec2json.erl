@@ -246,7 +246,7 @@ maybe_convertable(Value, [{Mod, Func, Args} | Types], Options) ->
     end;
 
 maybe_convertable(null, [undefined | Types], Options) ->
-    case proplists:get_value(null_is_undefined, Options, false) of
+    case proplists:get_value(null_is_undefined, Options, true) of
         true ->
             {ok, undefined};
         false ->
